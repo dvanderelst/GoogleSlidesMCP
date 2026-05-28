@@ -13,7 +13,7 @@ An MCP (Model Context Protocol) server that gives Claude access to your Google S
 
 - A Google account
 - A Google Cloud project with the Slides API and Drive API enabled
-- Python 3.10+
+- Python 3.10+ (recommended: [uv](https://docs.astral.sh/uv/) handles the venv and dependencies in one command)
 - A Railway account (or any host that runs a Python web app)
 
 ## Setup
@@ -132,19 +132,24 @@ Listens on port `8080` by default. Set `PORT` to override.
 
 ## Connect Claude
 
+The easiest path is to add the connector **once** at claude.ai. Claude Code and Claude Desktop automatically sync custom connectors from your account, so a single setup makes the server available everywhere.
+
 ### claude.ai (web)
 
-Settings → Integrations → Add custom integration. URL:
+1. Go to claude.ai → **Settings → Connectors → Add custom connector**.
+2. Name it (e.g. `GoogleSlidesMCP`).
+3. URL:
 
-```
-https://your-app.railway.app/sse?token=your-secret-token
-```
+   ```
+   https://your-app.railway.app/sse?token=your-secret-token
+   ```
 
-(`token` must match `MCP_AUTH_TOKEN` in Railway.)
+   `token` must match `MCP_AUTH_TOKEN` in Railway.
+4. After it connects, restart any open Claude Code or Claude Desktop session so it picks up the new connector. The tools will appear with names like `mcp__claude_ai_GoogleSlidesMCP__list_presentations`.
 
-### Claude Desktop / Claude Code
+### Manual config (fallback)
 
-Add to `~/.claude/claude_desktop_config.json` (or the equivalent MCP config):
+If you don't want to use account sync, add the server to `~/.claude/claude_desktop_config.json` (or the equivalent MCP config):
 
 ```json
 {
