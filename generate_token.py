@@ -18,6 +18,7 @@ you need to paste into Railway as environment variables:
 """
 
 import json
+import secrets
 from pathlib import Path
 
 from google_auth_oauthlib.flow import InstalledAppFlow
@@ -50,12 +51,20 @@ def main() -> None:
         secret = json.load(f)
     installed = secret.get("installed") or secret.get("web") or {}
 
+    mcp_auth_token = secrets.token_hex(32)
+
     print()
     print("Paste these into Railway as environment variables:")
     print()
     print(f"GOOGLE_CLIENT_ID={installed.get('client_id', '')}")
     print(f"GOOGLE_CLIENT_SECRET={installed.get('client_secret', '')}")
     print(f"GOOGLE_REFRESH_TOKEN={creds.refresh_token}")
+    print(f"MCP_AUTH_TOKEN={mcp_auth_token}")
+    print()
+    print("Save MCP_AUTH_TOKEN somewhere safe — you'll append it to your")
+    print("Claude MCP URL as `?token=<MCP_AUTH_TOKEN>`. Re-running this")
+    print("script mints a fresh one; update Railway and your Claude config")
+    print("together if you do.")
     print()
 
 

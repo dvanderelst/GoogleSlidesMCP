@@ -6,3 +6,5 @@ __pycache__/
 .idea/
 client_secret.json
 token.json
+
+mcp_token.txt

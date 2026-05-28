@@ -87,19 +87,16 @@ python generate_token.py
 
 A browser opens for consent → pick your Google account → expect a **"Google hasn't verified this app"** warning → **Advanced → Go to Slides MCP (unsafe)** → Allow.
 
-The script prints three values:
+The script prints all four values you need:
 
 ```
 GOOGLE_CLIENT_ID=...
 GOOGLE_CLIENT_SECRET=...
 GOOGLE_REFRESH_TOKEN=...
+MCP_AUTH_TOKEN=...
 ```
 
-Also invent a fourth, `MCP_AUTH_TOKEN`, e.g.:
-
-```bash
-python -c "import secrets; print(secrets.token_hex(32))"
-```
+`MCP_AUTH_TOKEN` is a freshly generated 64-character hex string used to protect the SSE endpoint. Save it somewhere safe — you'll also append it to your Claude MCP URL as `?token=<MCP_AUTH_TOKEN>`. Re-running the script mints a new one, so update Railway and your Claude config together if you do.
 
 ### 6. Deploy to Railway
 
