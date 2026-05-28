@@ -1,0 +1,14 @@
+[project]
+name = "google-slides-mcp"
+version = "0.1.0"
+description = "MCP server exposing read-only Google Slides tools over SSE."
+requires-python = ">=3.10"
+dependencies = [
+    "mcp",
+    "uvicorn[standard]",
+    "starlette",
+    "google-api-python-client",
+    "google-auth",
+    "google-auth-oauthlib",
+    "httpx",
+]
