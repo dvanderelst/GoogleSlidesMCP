@@ -4,7 +4,7 @@ version = "0.1.0"
 description = "MCP server exposing read-only Google Slides tools over SSE."
 requires-python = ">=3.10"
 dependencies = [
-    "mcp",
+    "mcp>=1.27,<2",
     "uvicorn[standard]",
     "starlette",
     "google-api-python-client",

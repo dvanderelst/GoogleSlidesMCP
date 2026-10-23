@@ -1,4 +1,4 @@
-mcp
+mcp>=1.27,<2
 uvicorn[standard]
 starlette
 google-api-python-client
